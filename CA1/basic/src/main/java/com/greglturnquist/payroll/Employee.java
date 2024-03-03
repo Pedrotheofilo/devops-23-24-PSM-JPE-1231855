@@ -28,76 +28,99 @@ import javax.persistence.Id;
 @Entity // <1>
 public class Employee {
 
-	private @Id @GeneratedValue Long id; // <2>
-	private String firstName;
-	private String lastName;
-	private String description;
+    private @Id
+    @GeneratedValue Long id; // <2>
+    private String firstName;
+    private String lastName;
+    private String description;
+    private int JobYears;
 
-	private Employee() {}
+    private Employee() {
+    }
 
-	public Employee(String firstName, String lastName, String description) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.description = description;
-	}
+    public Employee(String firstName, String lastName, String description, int JobYears) {
+        if (firstName == null || firstName.isEmpty())
+            throw new IllegalArgumentException("Invalid first name");
+        if (lastName == null || lastName.isEmpty())
+            throw new IllegalArgumentException("Invalid last name");
+        if (description == null || description.isEmpty())
+            throw new IllegalArgumentException("Invalid description");
+        if (JobYears < 0)
+            throw new IllegalArgumentException("Invalid job years");
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Employee employee = (Employee) o;
-		return Objects.equals(id, employee.id) &&
-			Objects.equals(firstName, employee.firstName) &&
-			Objects.equals(lastName, employee.lastName) &&
-			Objects.equals(description, employee.description);
-	}
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+        this.JobYears = JobYears;
+    }
 
-	@Override
-	public int hashCode() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+                Objects.equals(firstName, employee.firstName) &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(description, employee.description) &&
+                Objects.equals(JobYears, employee.JobYears);
+    }
 
-		return Objects.hash(id, firstName, lastName, description);
-	}
+    @Override
+    public int hashCode() {
 
-	public Long getId() {
-		return id;
-	}
+        return Objects.hash(id, firstName, lastName, description, JobYears);
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	@Override
-	public String toString() {
-		return "Employee{" +
-			"id=" + id +
-			", firstName='" + firstName + '\'' +
-			", lastName='" + lastName + '\'' +
-			", description='" + description + '\'' +
-			'}';
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getJobYears() {
+        return JobYears;
+    }
+
+    public void setJobYears(int JobYears) {
+        this.JobYears = JobYears;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", description='" + description + '\'' +
+                ", JobYears=" + JobYears +
+                '}';
+    }
 }
 // end::code[]

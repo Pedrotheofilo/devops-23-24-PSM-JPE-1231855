@@ -35,10 +35,12 @@ public class Employee {
     private String description;
     private int JobYears;
 
+    private String email;
+
     private Employee() {
     }
 
-    public Employee(String firstName, String lastName, String description, int JobYears) {
+    public Employee(String firstName, String lastName, String description, int JobYears, String email) {
         if (firstName == null || firstName.isEmpty())
             throw new IllegalArgumentException("Invalid first name");
         if (lastName == null || lastName.isEmpty())
@@ -47,11 +49,14 @@ public class Employee {
             throw new IllegalArgumentException("Invalid description");
         if (JobYears < 0)
             throw new IllegalArgumentException("Invalid job years");
+        if (email == null || email.isEmpty())
+            throw new IllegalArgumentException("Invalid email");
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
         this.JobYears = JobYears;
+        this.email = email;
     }
 
     @Override
@@ -63,13 +68,14 @@ public class Employee {
                 Objects.equals(firstName, employee.firstName) &&
                 Objects.equals(lastName, employee.lastName) &&
                 Objects.equals(description, employee.description) &&
-                Objects.equals(JobYears, employee.JobYears);
+                Objects.equals(JobYears, employee.JobYears) &&
+                Objects.equals(email, employee.email);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, firstName, lastName, description, JobYears);
+        return Objects.hash(id, firstName, lastName, description, JobYears, email);
     }
 
     public Long getId() {
@@ -112,6 +118,14 @@ public class Employee {
         this.JobYears = JobYears;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -120,6 +134,7 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", description='" + description + '\'' +
                 ", JobYears=" + JobYears +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

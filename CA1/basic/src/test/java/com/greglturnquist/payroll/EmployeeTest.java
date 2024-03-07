@@ -138,6 +138,12 @@ class EmployeeTest {
     }
 
     @Test
+    void testSetEmailWithoutAtSign() {
+        Employee employee = new Employee("John", "Doe", "Developer", 5, "john.doe@example.com");
+        assertThrows(IllegalArgumentException.class, () -> employee.setEmail("invalidemail"));
+    }
+
+    @Test
     void testToString() {
         Employee employee = new Employee("John", "Doe", "Developer", 5, "frodobeggins@hotmail.com");
         assertEquals("Employee{id=null, firstName='John', lastName='Doe', description='Developer', JobYears=5, email='frodobeggins@hotmail.com'}", employee.toString());

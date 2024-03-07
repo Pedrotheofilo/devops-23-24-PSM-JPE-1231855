@@ -123,6 +123,8 @@ public class Employee {
     }
 
     public void setEmail(String email) {
+        if(email == null || email.isEmpty() || !email.contains("@"))
+            throw new IllegalArgumentException("Invalid email");
         this.email = email;
     }
 

@@ -79,4 +79,13 @@ task backup(type: Copy){
     into 'backup'
 }
 
+task zip(type: Zip){
+    group = "DevOps"
+    description = "Zip the chat logs"
+
+    from 'src'
+    archiveFileName = 'backup.zip'
+    destinationDir(file('build'))
+}
+
 

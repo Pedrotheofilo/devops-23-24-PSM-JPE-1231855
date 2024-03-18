@@ -71,4 +71,12 @@ task runServer(type:JavaExec, dependsOn: classes){
     args '59001'
 }
 
+task backup(type: Copy){
+    group = "DevOps"
+    description = "Backup the chat logs"
+
+    from 'src'
+    into 'backup'
+}
+
 

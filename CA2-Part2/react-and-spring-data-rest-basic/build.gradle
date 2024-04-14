@@ -34,6 +34,10 @@ task copyJar(type: Copy, dependsOn: build) {
     include '*.jar'
 }
 
+task deleteWebpackFiles(type: Delete) {
+    delete 'src/main/resources/static/built'
+}
+
 
 frontend {
     nodeVersion = '16.20.2'

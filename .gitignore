@@ -488,4 +488,7 @@ fabric.properties
 **/!.idea/codeStyles
 **/!.idea/runConfigurations
 
+.vagrant
+*.war
+
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all

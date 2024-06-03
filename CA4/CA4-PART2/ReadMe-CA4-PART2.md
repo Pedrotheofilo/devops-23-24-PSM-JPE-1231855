@@ -199,6 +199,7 @@ Inside de container shell:
 
 ```bash
 git tag -a ca4-part2 -m "CA4 Part 2"
+git push origin ca4-part2
 ```
 
 # Conclusion

@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out from repository'
+                git url: 'https://github.com/Pedrotheofilo/devops-23-24-PSM-JPE-1231855.git', branch: 'main'
+            }
+        }
+        stage('Assemble') {
+            steps {
+
+                dir('CA2/part1/gradle_basic_demo') {
+                echo 'Assembling...'
+                sh 'chmod +x gradlew'
+                sh './gradlew clean assemble'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+
+                dir('CA2/part1/gradle_basic_demo') {
+                echo 'Running Tests...'
+                    sh './gradlew test'
+                    junit 'build/test-results/test/.xml'
+                }
+            }
+            post {
+                always {
+
+                    junit 'CA2/part1/gradle_basic_demo/build/test-results/test/.xml'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+
+                dir('CA2/part1/gradle_basic_demo') {
+                echo 'Archiving artifacts...'
+
+                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+                }
+            }
+        }
+    }
+}

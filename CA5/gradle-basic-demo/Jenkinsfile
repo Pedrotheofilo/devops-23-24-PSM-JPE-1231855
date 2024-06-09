@@ -24,13 +24,13 @@ pipeline {
                 dir('CA2-Part1/gradleBasicDemo') {
                 echo 'Running Tests...'
                     sh './gradlew test'
-                    junit 'build/test-results/test/.xml'
+                    junit 'build/test-results/test/*.xml'
                 }
             }
             post {
                 always {
 
-                    junit 'CA2-Part1/gradleBasicDemo/build/test-results/test/.xml'
+                    junit 'CA2-Part1/gradleBasicDemo/build/test-results/test/*.xml'
                 }
             }
         }
